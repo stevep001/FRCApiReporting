@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 public class EventsResult
 {
@@ -23,6 +24,7 @@ public class Event
     public string country { get; set; }
     public DateTime dateStart { get; set; }
     public DateTime dateEnd { get; set; }
+
 }
 
 public class TeamsResult
@@ -48,6 +50,12 @@ public class Team
     public int rookieYear { get; set; }
     public string robotName { get; set; }
     public object districtCode { get; set; }
+
+
+    public override string ToString()
+    {
+        return $"{this.teamNumber} - {this.nameShort}";
+    }
 }
 
 
@@ -61,15 +69,65 @@ public class Ranking
     public int rank { get; set; }
     public int teamNumber { get; set; }
     public float sortOrder1 { get; set; }
-    public int sortOrder2 { get; set; }
-    public int sortOrder3 { get; set; }
-    public int sortOrder4 { get; set; }
-    public int sortOrder5 { get; set; }
-    public int sortOrder6 { get; set; }
+    public float sortOrder2 { get; set; }
+    public float sortOrder3 { get; set; }
+    public float sortOrder4 { get; set; }
+    public float sortOrder5 { get; set; }
+    public float sortOrder6 { get; set; }
     public int wins { get; set; }
     public int losses { get; set; }
     public int ties { get; set; }
     public float qualAverage { get; set; }
     public int dq { get; set; }
     public int matchesPlayed { get; set; }
+
+}
+
+
+public class AwardsResult
+{
+    public Award[] Awards { get; set; }
+}
+
+public class Award
+{
+    public int awardId { get; set; }
+    public int? teamId { get; set; }
+
+    [JsonIgnore]
+    public int eventId { get; set; }
+
+    [JsonIgnore]
+    public object eventDivisionId { get; set; }
+
+    public string eventCode { get; set; }
+    public string name { get; set; }
+    public int series { get; set; }
+    public int? teamNumber { get; set; }
+    public string schoolName { get; set; }
+    public string fullTeamName { get; set; }
+    public string person { get; set; }
+
+    public override string ToString()
+    {
+        return this.name;
+    }
+}
+
+public class AlliancesResult
+{
+    public Alliance[] Alliances { get; set; }
+    public int count { get; set; }
+}
+
+public class Alliance
+{
+    public int number { get; set; }
+    public int captain { get; set; }
+    public int round1 { get; set; }
+    public int round2 { get; set; }
+    public int round3 { get; set; }
+    public object backup { get; set; }
+    public object backupReplaced { get; set; }
+    public string name { get; set; }
 }
